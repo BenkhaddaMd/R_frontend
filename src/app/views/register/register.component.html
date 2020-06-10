@@ -1,0 +1,62 @@
+
+    <div class="col-sm">
+      <mat-card>
+          <h3>Ajouter Employé(e)</h3>
+          <form #RegistreForm=ngForm>
+            <div class="form-group">
+                <mat-form-field appearance="fill" style="width: 49%;" >
+                   <input name="username" [(ngModel)]="registre.username" matInput placeholder="Entrer Nom" required>
+                </mat-form-field>
+        
+                <mat-form-field appearance="fill" style="width: 49%;">
+                   <input name="email" [(ngModel)]="registre.email" matInput placeholder="Entrer Email" required>
+                </mat-form-field>
+
+                <div class="alert alert-danger" *ngIf="errors.name || errors.email">
+                  <small>{{errors.name}}</small>
+                  <small *ngIf="errors.name && errors.email">and also</small>
+                  <small>{{errors.email}}</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field appearance="fill" style="width: 98%;">
+                    <mat-label>Fonction</mat-label>
+                    <mat-select name="fonction" [(ngModel)]="registre.fonction" required> 
+                      <mat-option *ngFor="let fonction of fonctions" [value]="fonction.value" >
+                        {{fonction.value}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field appearance="fill" style="width: 49%;">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="registre.password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+              <mat-form-field appearance="fill" style="width: 49%;">
+                <mat-label>Confirme your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" name="r_password" [(ngModel)]="registre.r_password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+              <div class="alert alert-danger" *ngIf="errors.password">
+                <small>{{errors.password}}</small>
+              </div>
+            </div>
+            
+            <div class="form-group">  
+                <h3>Choisir une image</h3>
+                <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="onImagesSelected($event)" accept=".jpg"/>
+                <button mat-flat-button color="primary" (click)="csvInput.click()">Import</button>              
+            </div>            
+            <h3>Ajouter l'employe(e)</h3>
+            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" >Ajouter</button>
+          </form>
+      </mat-card>
+    </div>

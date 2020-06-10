@@ -1,0 +1,70 @@
+
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab *ngFor="let cat of categorise" [label]="cat.name"> 
+    <ng-template matTabContent>
+      <div *ngFor="let plat of plats; let i = index"> 
+        <div class="bottom form-control" *ngIf="plat.categorie != cat.name && cat.name != 'Tous'" style="display: none;"></div>
+        <div class="card" *ngIf="plat.categorie == cat.name || cat.name == 'Tous'">
+          <div class="body-card">
+            <div class="top"> <img [src]="'./assets/img/uploadImages/'+plat.image" alt=""> </div>
+            <div class="bottom">
+              <div class="left">
+                <div class="details">
+                  <h1>{{plat.name}}</h1>
+                  <p>{{plat.prix}}DH</p>  
+                </div>
+            
+                <div class="buy" (click)="buy(i, plat)"><i class="material-icons">add_shopping_cart</i></div>
+              </div>
+              <div class="right">
+                <div class="done"><i class="material-icons">done</i></div>
+                <div class="details">
+                  <h1>{{plat.name}}</h1>
+                  <p>A été ajouté a votre commande</p>
+                </div>
+                <div class="remove" (click)="remove(i,plat)"><i class="material-icons">clear</i></div>
+              </div>
+            </div>
+          </div>
+          <div class="inside">
+            <div class="icon"><i class="material-icons">info_outline</i></div>
+            <div class="contents">
+              <table class="mt-3">
+                <tr>
+                  <th>Nom</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td>{{plat.name}}</td>
+                  <td>{{plat.description}}</td>
+                </tr>
+                <tr>
+                  <th>Prix</th>
+                  <th>categorie</th>
+                </tr>
+                <tr>
+                  <td>{{plat.prix}} DH</td>
+                  <td>{{plat.categorie}}</td>
+                </tr>
+              </table>
+
+                <p class="font-weight-bold mt-3 text-uppercase text-center">Quantite</p>
+                <input class="form-control disabled" name="quantity" id="quantity" #input (blur)="createLine(plat, $event.target.value)" type="number" placeholder="Quantite" value="1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+<button class="mdc-fab app-fab-remove-absolute app-fab--absolute" *ngIf="commandeReady" (click)="removeCommande()">
+  <div class="mdc-fab__ripple"></div>
+  <span class="material-icons mdc-fab__icon">delete</span>
+</button>
+
+<button class="mdc-fab mdc-fab--extended app-fab--absolute" *ngIf="commandeReady" (click)="openDialog()">
+  <div class="mdc-fab__ripple"></div>
+  <span class="material-icons mdc-fab__icon">add</span>
+  <span class="mdc-fab__label">Create</span>
+</button>

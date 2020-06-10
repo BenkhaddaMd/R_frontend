@@ -1,0 +1,211 @@
+.app-fab--absolute {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+.app-fab-remove-absolute{
+  background-color: #f14848;
+}
+.app-fab-remove-absolute {
+  position: fixed;
+  bottom: 5rem;
+  right: 1rem;
+}
+  .card{
+    float: left;
+    width: 300px;
+    height: 500px;
+    overflow: hidden;
+    background: white;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0;
+    transform: scale(0.95);
+    transition: box-shadow 0.5s, transform 0.5s;
+    &:hover{
+      transform: scale(1);
+      box-shadow: 5px 20px 30px rgba(0,0,0,0.2);
+    }
+    
+    .body-card{
+      width:100%;
+      height:100%;
+      .top{
+        height: 80%;
+         img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .bottom{
+        width: 200%;
+        height: 20%;
+        transition: transform 0.5s;
+        &.clicked{
+          transform: translateX(-50%);
+        }
+        h1{
+            margin:0;
+            padding:0;
+        }
+        p{
+            margin:0;
+            padding:0;
+        }
+        .left{
+          height:100%;
+          width: 50%;
+          background: #f4f4f4;
+          position:relative;
+          float:left;
+          .details{
+            padding: 20px;
+            float: left;
+            width: calc(70% - 40px);
+          }
+          .buy{
+            cursor: pointer;
+            float:right;
+            width: calc(30% - 2px);
+            height:100%;
+            background: #f1f1f1;
+            transition: background 0.5s;
+            border-left:solid thin rgba(0,0,0,0.1);
+            i{
+              font-size:30px;
+              padding:30px;
+              color: #254053;
+              transition: transform 0.5s;
+            }
+            &:hover{
+              background: #A6CDDE;
+            }
+            &:hover i{
+              transform: translateY(5px);
+              color:#00394B;
+            }
+          }
+        }
+        .right{
+          width: 50%;
+          background: #A6CDDE;
+          color: white;
+          float:right;
+          height:200%;
+          overflow: hidden;
+          .details{
+            padding: 20px;
+            float: right;
+            width: calc(80% - 40px);
+          }
+          .done{
+            width: calc(20% - 2px);
+            float:left;
+            transition: transform 0.5s;
+            border-right:solid thin rgba(255,255,255,0.3);
+            height:50%;
+            i{
+              font-size:30px;
+              padding:30px;
+              color: white;
+            }
+          }
+          .remove{
+            cursor: pointer;
+            width: calc(30% - 1px);
+            clear: both;
+            border-right:solid thin rgba(255,255,255,0.3);
+            height:50%;
+            background: #BC3B59;
+            transition: transform 0.5s, background 0.5s;
+            &:hover{
+              background: #9B2847;
+            }
+            &:hover i{
+              transform: translateY(5px);
+            }
+            i{
+              transition: transform 0.5s;
+              font-size:30px;
+              padding:30px;
+              color: white;
+            }
+          }
+          &:hover{
+            .remove, .done{
+              transform: translateY(-100%);
+            }
+          }
+        }
+      }
+    }
+    
+    .inside{
+      z-index:9;
+      background: rgb(0, 146, 146);
+      width:140px;
+      height:140px;
+      position: absolute;
+      top: -70px;
+      right: -70px;
+      border-radius: 0px 0px 200px 200px;
+      transition: all 0.5s, border-radius 2s, top 1s;
+      overflow: hidden;
+      .icon{
+        position:absolute;
+        right:85px;
+        top:85px;
+        color:white;
+        opacity: 1;
+      }
+      &:hover{
+        width:100%;
+        right:0;
+        top:0;
+        border-radius: 0;
+        height:80%;
+        .icon{
+          opacity: 0;
+          right:15px;
+          top:15px;
+        }
+        .contents{
+          opacity: 1;
+          transform: scale(1);
+          transform: translateY(0);
+        }
+      }
+      .contents{
+        padding: 5%;
+        opacity: 0;
+        transform: scale(0.5);
+        transform: translateY(-200%);
+        transition: opacity 0.2s, transform 0.8s;
+        table{
+          text-align:left;
+          width:100%;
+        }
+        h1, p, table{
+          color: white;
+        }
+        p{
+          font-size:13px;
+        }
+      }
+    }
+  }
+  .mat-tab-label {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: rgb(39, 37, 37);
+    color: rgb(255, 255, 255);
+    border-radius: 30px;
+    margin: 0 4px;
+    font-weight: 700;
+}
+.mat-ink-bar {
+  display: none;
+}
+.mdc-fab{
+  z-index: 99;
+}

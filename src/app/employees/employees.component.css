@@ -1,0 +1,18 @@
+.card-avatar {
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 100px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 100px;
+    -moz-background-clip: padding;
+    border-radius: 100px;
+    background-clip: padding-box;
+    margin: 7px auto;
+    background-size: 100px;
+    background-position: center center;
+}
+.card-avatar img{
+  border: 3px solid rgb(173, 175, 175);
+}
+.card-text{
+}

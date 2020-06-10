@@ -1,0 +1,67 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    Ajouter Categorie
+    <span class="example-spacer"></span>
+    <span class="material-icons">label</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="col-sm m-2">
+    <mat-card>
+        <h3>Entrez vous infos</h3>
+        <form #categoryForm=ngForm>
+          <div class="form-group">
+              <mat-form-field appearance="fill" style="width: 49%;">
+              <input name="name" [(ngModel)]="category.name" matInput placeholder="Entrer Nom" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 49%;">
+            <input name="description" [(ngModel)]="category.description" matInput placeholder="Entrer Description" required>
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!categoryForm.valid" (click)="onSubmitCategory()">Ajouter</button>
+        </form>
+    </mat-card>
+  </div>
+  <mat-toolbar>
+    
+    <mat-toolbar-row>
+      Ajouter un Plat
+      <span class="example-spacer"></span>
+      <span class="material-icons">fastfood</span>    
+      </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="col-sm m-2">
+    <mat-card>
+        <h3>Entrez vous infos</h3>
+        <form #productForm=ngForm>
+          <div class="form-group">
+              <mat-form-field appearance="fill" style="width: 49%;" >
+                 <input name="name" [(ngModel)]="plat.name" matInput placeholder="Entrer Nom" required>
+              </mat-form-field>
+              
+              <mat-form-field appearance="fill" style="width: 49%;">
+                 <input name="description" [(ngModel)]="plat.description" matInput placeholder="Entrer Description" required>
+              </mat-form-field>
+          </div>
+          <div class="form-group">
+              <mat-form-field appearance="fill" style="width: 49%;">
+                  <mat-label>Categorie</mat-label>
+                  <mat-select name="categorie" [(ngModel)]="plat.categorie">
+                    <mat-option *ngFor="let cat of allCategories" [value]="cat.name">
+                      {{cat.name}}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill" style="width: 49%;">
+                <input name="prix" [(ngModel)]="plat.prix" matInput placeholder="Entrer Prix" required>
+             </mat-form-field>
+          </div>
+
+          <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="onImagesSelected($event)" accept=".jpg"/>
+          <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Image</button>
+
+          <button mat-raised-button color="primary" style="width: 150px;" type="submit" [disabled]="!productForm.valid" (click)="onSubmitPlat()">Ajouter</button>
+        </form>
+    </mat-card>
+  </div>

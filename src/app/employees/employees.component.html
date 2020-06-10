@@ -1,0 +1,23 @@
+<mat-card class="mb-2" *ngFor="let employee of AllEmployees">
+<div class="row">
+    <div class="col-9">
+        <div class="">
+            <h2>{{employee.name | uppercase}}</h2>   
+            <h3><span>Email:</span>  {{employee.email}}</h3>
+            <h3><span>Fonction:</span> {{employee.fonction}}</h3>
+        </div>
+    </div>
+    <div class="col-3">
+            <a (click)="showHide()" class="btn btn-primary">Photo </a>
+            <img [src]="employee.image" class="img-responsive img-thumbnail" *ngIf="showOrHide">          
+
+        <div class="">
+           <!--  <img [src]="employee.image" class="card-avatar"> -->
+           </div> 
+    </div>
+  </div>
+
+    
+   
+ 
+</mat-card>

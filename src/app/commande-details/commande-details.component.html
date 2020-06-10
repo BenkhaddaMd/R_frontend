@@ -1,0 +1,23 @@
+<mat-toolbar style="border-radius: 14px;">
+    <mat-toolbar-row>
+      Entrez Les infos du Commande
+      <span class="example-spacer"></span>
+      <span class="material-icons">label</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+<div class="container p-3">
+  <h4 *ngIf="data.error" class="text-danger">{{data.error}}</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Votre numero du table</mat-label>
+      <input matInput [(ngModel)]="data.numero_table" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Votre Commentaire</mat-label>
+        <input matInput [(ngModel)]="data.commente" required>
+    </mat-form-field>
+</div>
+
+<button mat-button (click)="onNoClick()">Annuler</button>
+<button mat-button [mat-dialog-close]="data" cdkFocusInitial>Valider</button>

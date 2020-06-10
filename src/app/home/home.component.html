@@ -1,0 +1,15 @@
+<mat-card>
+    <div class="card-body">
+      <div class="h1 text-muted text-right mb-4">
+        <i class="icon-speedometer"></i>
+      </div>
+  
+      <h2><span class="badge badge-success" *ngIf="!(hours==0)">On Work</span></h2>
+      <h2><span class="badge badge-secondary" *ngIf="hours==0">Off Work</span></h2>
+
+
+      <div class="h4 mb-0">{{ myDate | date:  'EEEE, MMMM d, y, h:mm:ss a' }}</div>
+      <small class="text-muted text-uppercase font-weight-bold">Progress d'emploi de temps</small>
+      <progress-bar [progress]="hours" [color]="'#0954af'"></progress-bar>
+    </div>
+  </mat-card>

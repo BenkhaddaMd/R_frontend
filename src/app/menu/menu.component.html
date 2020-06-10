@@ -1,0 +1,49 @@
+<mat-card>    
+    <mat-form-field>
+        <mat-label>Rechercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex:Fast Food">
+    </mat-form-field> 
+    <span class="material-icons">search</span>
+<div class="mat-elevation-z8 example-container">
+        
+    <table mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="categorie">
+        <th mat-header-cell *matHeaderCellDef> Categorie </th>
+        <td mat-cell *matCellDef="let element"> {{element.categorie}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="prix">
+        <th mat-header-cell *matHeaderCellDef> Prix </th>
+        <td mat-cell *matCellDef="let element"> {{element.prix}}DH </td>
+      </ng-container>
+
+      <ng-container matColumnDef="...">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <a style="cursor: pointer;" (click)="delete(element.id)"><span class="material-icons">delete</span></a>
+        </td>
+      </ng-container>
+
+       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> 
+  </div>
+</mat-card>    
