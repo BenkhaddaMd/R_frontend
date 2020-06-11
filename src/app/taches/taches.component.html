@@ -1,1 +1,53 @@
-<p>taches works!</p>
+<mat-card>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      Les Commandes de Comptoirise
+      <span class="example-spacer"></span>
+      <span class="material-icons">fastfood</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+    <table class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">No. Table</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Total</th>
+            <th scope="col">Status</th>
+            <th scope="col">Plas</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let oneCommand of allCommands; let i = index">
+          <tr>
+            <th scope="row">{{oneCommand.numero_table}}</th>
+            <td>{{oneCommand.commente}}</td>
+            <td>{{oneCommand.total}} DH</td>
+            <td (click)="valider(oneCommand)"> <h3> <span class="badge badge-pill badge-light clickable">{{oneCommand.status}}</span></h3></td>
+            <td><span class="material-icons clickable" (click)="visibility(i)">menu_open</span></td>
+          </tr>
+          <tr [class.d-none]="!visible[i]">
+              <td colspan="4">
+                <table class="table table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nom de plat</th>
+                        <th scope="col">Description de plat</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Prix</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let line of oneCommand.lineOfcommands">
+                        <th scope="row">{{platName(line.idPlat)}}</th>
+                        <td>{{descPlat(line.idPlat)}}</td>
+                        <td>{{line.quantity}}</td>
+                        <td>{{line.Prix}} DH</td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </td>
+            
+          </tr>
+        </tbody>
+      </table>
+</mat-card>

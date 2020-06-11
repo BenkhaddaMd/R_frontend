@@ -64,6 +64,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { RegisterComponent } from './register/register.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CommandeDetailsComponent } from './commande-details/commande-details.component';
+import { TachesCaissierComponent } from './taches-caissier/taches-caissier.component';
 
 @NgModule({
   entryComponents: [CommandeDetailsComponent],
@@ -111,6 +112,7 @@ import { CommandeDetailsComponent } from './commande-details/commande-details.co
     EmployeesComponent,
     MenuServeurComponent,
     CommandeDetailsComponent,
+    TachesCaissierComponent,
   ],
   providers: [{
     provide: LocationStrategy,

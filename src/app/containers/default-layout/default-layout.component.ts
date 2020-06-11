@@ -88,7 +88,7 @@ export class DefaultLayoutComponent {
      icon: 'icon-people',
    },
    {
-     name: 'Taches',
+     name: 'Taches Comptoiriste',
      url: '/taches',
      icon: 'icon-note',
    },
@@ -106,6 +106,11 @@ export class DefaultLayoutComponent {
     name: 'Gestion Menu',
     url: '/menugestion',
     icon: 'icon-equalizer',
+  },
+  {
+    name: 'Taches Caissier',
+    url: '/tachesCaissier',
+    icon: 'icon-note',
   },
   
  ];

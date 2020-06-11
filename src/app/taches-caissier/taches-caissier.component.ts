@@ -1,42 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AllServicesService } from '../all-services.service';
+import { command, Plat, Commande, lineOfcommand } from '../taches/taches.component';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
-export class command{
-  id:number;
-  numero_table:number;
-  total:number;
-  status:string;
-  commente:string;
-  lineOfcommands:lineOfcommand[];
-}
-export class lineOfcommand{
-  id: number; 
-  idPlat: number; 
-  idCommande: number; 
-  quantity: number; 
-  Prix: number
-}
-export class Plat{
-  id:number;
-  name: string;
-  description: string;
-  categorie: string;
-  prix: number;
-  image: string;
-}
-export class Commande{
-  id:number;
-  numero_table:number;
-  total:number;
-  status:string;
-  commente:string;
-}
 @Component({
-  selector: 'app-taches',
-  templateUrl: './taches.component.html',
-  styleUrls: ['./taches.component.css']
+  selector: 'app-taches-caissier',
+  templateUrl: './taches-caissier.component.html',
+  styleUrls: ['./taches-caissier.component.css']
 })
-export class TachesComponent implements OnInit {
+export class TachesCaissierComponent implements OnInit {
 
   public allCommands : command[] = [];
   public plats : Plat[] = [];
@@ -52,8 +25,8 @@ constructor(private myServ:AllServicesService){
       (data:Commande[]) =>{
         let i = 0;
         for(let onCom of data){
-          if(onCom.status=='en attente' || onCom.status=='en preparation')
-          {
+          if(onCom.status=="prêt" || onCom.status=="payé")
+          {            
             this.visible[i]=false;
             let com:command = {id:onCom.id, numero_table:onCom.numero_table,total:onCom.total,status:onCom.status,commente:onCom.commente,lineOfcommands:null};
             this.myServ.getLineCommands(onCom.id).subscribe(
@@ -62,7 +35,7 @@ constructor(private myServ:AllServicesService){
                 this.allCommands.push(com);
                 if(data[data.length-1] == onCom) this.test = true;
               }
-            );
+            ); 
           }
           i++;
         }
@@ -92,15 +65,36 @@ constructor(private myServ:AllServicesService){
     for(let com of this.allCommands){
       if(com.id == oneCommand.id)
         {
-          if(com.status == "en attente")
-            com.status="en preparation";
-          else if(com.status == "en preparation") 
-            com.status="prêt";
+          if(com.status == "prêt")
+            com.status="payé";
           this.myServ.changeStatus({id:oneCommand.id, status: com.status}).subscribe();
 
 
         }
     }
+
+  }
+
+  facture(com:command){
+    let total = 0;
+    let doc = new jsPDF()
+    let factures : Array<string>[] = [];
+    for(let line of com.lineOfcommands){
+      total += line.Prix*line.quantity;
+      factures.push([line.quantity+'',this.platName(line.idPlat)+' '+this.descPlat(line.idPlat),line.Prix+'',line.Prix*line.quantity+''])
+    }
+    factures.push(['Total',,,total+''])
+  var finalY = doc.previousAutoTable.finalY || 10
+  doc.text('Facture de Pyament', 14, finalY + 15)
+  doc.autoTable({
+    startY: finalY + 20,
+    head: [['QTE', 'DESIGNATION', 'PRIX UNIT', 'MONTANT']],
+    body: factures,
+  })
+
+    doc.save('facture.pdf');
+
+     doc = new jsPDF()
 
   }
 

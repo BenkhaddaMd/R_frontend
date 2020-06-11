@@ -17,6 +17,7 @@ import { MenugestionComponent } from './menugestion/menugestion.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { MenuServeurComponent } from './menu-serveur/menu-serveur.component';
 import { RegisterComponent } from './register/register.component';
+import { TachesCaissierComponent } from './taches-caissier/taches-caissier.component';
 
 export const routes: Routes = [
   {
@@ -54,7 +55,9 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
-      { path: 'taches', component: TachesComponent, canActivate: [AfterLoginService]
+      { path: 'tachesCaissier', component: TachesCaissierComponent, canActivate: [AfterLoginService]
+    },
+    { path: 'taches', component: TachesComponent, canActivate: [AfterLoginService]
     },
       { path: 'menu', component: MenuComponent, canActivate: [AfterLoginService]
     },

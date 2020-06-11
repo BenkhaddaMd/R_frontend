@@ -48,4 +48,13 @@ export class AllServicesService {
   deletePlat(id){
     return this.http.get(`${this.url}/deletePlat/${id}`);
   }
+  getCommands(){
+    return this.http.get(`${this.url}/getCommands`);
+  }
+  getLineCommands(id){
+    return this.http.get(`${this.url}/getLineCommands/${id}`);
+  }
+  changeStatus(data){
+    return this.http.post(`${this.url}/changeStatus`, data);
+  }
 }
