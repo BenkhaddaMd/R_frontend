@@ -7,7 +7,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
   
-    <table class="table table-hover table-dark">
+    <table class="table table-hover table-dark" *ngIf="allCommands.length != 0">
         <thead>
           <tr>
             <th scope="col">No. Table</th>
@@ -22,7 +22,11 @@
             <th scope="row">{{oneCommand.numero_table}}</th>
             <td>{{oneCommand.commente}}</td>
             <td>{{oneCommand.total}} DH</td>
-            <td (click)="valider(oneCommand)"> <h3> <span class="badge badge-pill badge-light clickable">{{oneCommand.status}}</span></h3></td>
+            <td (click)="valider(oneCommand)"> 
+              <h3>
+                <span class="badge badge-pill badge-light clickable">{{oneCommand.status}}</span>
+              </h3>
+            </td>
             <td><span class="material-icons clickable" (click)="visibility(i)">menu_open</span></td>
           </tr>
           <tr [class.d-none]="!visible[i]">
@@ -50,4 +54,7 @@
           </tr>
         </tbody>
       </table>
+      <h1 *ngIf="allCommands.length == 0" class="text-center">
+        Aucun commandes
+      </h1>
 </mat-card>

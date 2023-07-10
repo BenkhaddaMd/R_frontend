@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AllServicesService } from '../all-services.service';
-import { command, Plat, Commande, lineOfcommand } from '../taches/taches.component';
+import {  Plat, Commande, lineOfcommand } from '../taches/taches.component';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
-
+ class command{
+  id:number;
+  numero_table:string;
+  total:number;
+  status:string;
+  commente:string;
+  lineOfcommands:lineOfcommand[];
+}
 @Component({
   selector: 'app-taches-caissier',
   templateUrl: './taches-caissier.component.html',
@@ -20,7 +27,17 @@ export class TachesCaissierComponent implements OnInit {
 constructor(private myServ:AllServicesService){
 }
   ngOnInit(): void {
+    
+    //this.commandsLog();
     this.myServ.getPlats().subscribe((data:Plat[]) => this.plats = data);
+    this.getAllCommands();
+    setInterval(()=>{
+      this.getAllCommands();
+    }, 10000);
+
+  }
+
+  getAllCommands(){
     this.myServ.getCommands().subscribe(
       (data:Commande[]) =>{
         let i = 0;
@@ -28,10 +45,17 @@ constructor(private myServ:AllServicesService){
           if(onCom.status=="prêt" || onCom.status=="payé")
           {            
             this.visible[i]=false;
-            let com:command = {id:onCom.id, numero_table:onCom.numero_table,total:onCom.total,status:onCom.status,commente:onCom.commente,lineOfcommands:null};
+            let com:command = {id:onCom.id, numero_table:onCom.numero_table+'',total:onCom.total,status:onCom.status,commente:onCom.commente,lineOfcommands:null};
             this.myServ.getLineCommands(onCom.id).subscribe(
               (data1:lineOfcommand[])=>{
                 com.lineOfcommands=data1;
+                let test = true;
+                for(let one of this.allCommands){
+                  if(one.id == com.id){
+                    one.status = com.status; one.numero_table = com.numero_table; test = false;
+                  }
+                }
+                if(test)
                 this.allCommands.push(com);
                 if(data[data.length-1] == onCom) this.test = true;
               }
@@ -65,14 +89,16 @@ constructor(private myServ:AllServicesService){
     for(let com of this.allCommands){
       if(com.id == oneCommand.id)
         {
-          if(com.status == "prêt")
-            com.status="payé";
-          this.myServ.changeStatus({id:oneCommand.id, status: com.status}).subscribe();
-
-
+          if(com.status == "prêt"){
+            this.myServ.changeStatusCaissier({id:oneCommand.id, status: "payé", numero_table: '!'+com.numero_table}).subscribe(
+              data=>{
+                com.status="payé";
+                com.numero_table= '!'+com.numero_table;
+              }
+            );
+          }
         }
     }
-
   }
 
   facture(com:command){
@@ -81,9 +107,9 @@ constructor(private myServ:AllServicesService){
     let factures : Array<string>[] = [];
     for(let line of com.lineOfcommands){
       total += line.Prix*line.quantity;
-      factures.push([line.quantity+'',this.platName(line.idPlat)+' '+this.descPlat(line.idPlat),line.Prix+'',line.Prix*line.quantity+''])
+      factures.push([line.quantity+'',this.platName(line.idPlat)+' '+this.descPlat(line.idPlat),line.Prix+' DH',line.Prix*line.quantity+' DH'])
     }
-    factures.push(['Total',,,total+''])
+    factures.push(['Total',,,total+' DH'])
   var finalY = doc.previousAutoTable.finalY || 10
   doc.text('Facture de Pyament', 14, finalY + 15)
   doc.autoTable({
@@ -96,6 +122,31 @@ constructor(private myServ:AllServicesService){
 
      doc = new jsPDF()
 
+  }
+
+  commandsLog(){
+    setInterval(()=>{
+      let myDate = new Date();
+      let h = 0,day = 0,day_bd=0;
+      
+      h = +myDate[Symbol.toPrimitive]('string').split(' ')[4].split(':')[0];  
+      day = +myDate[Symbol.toPrimitive]('string').split(' ')[2];  
+      if(h>=8 && h<=9){
+        this.myServ.getLastDay().subscribe(
+          (data:string)=>{
+            day_bd  = (Number)(data.split('-')[2][0]+data.split('-')[2][1]);  
+            if(day != day_bd){
+               this.saveCommands();           
+             }
+          }
+        )      
+      }
+      
+    }, 60000);
+  }
+
+  saveCommands(){
+    this.myServ.saveCommands().subscribe();
   }
 
 }

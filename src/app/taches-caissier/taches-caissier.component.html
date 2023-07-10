@@ -7,7 +7,7 @@
       </mat-toolbar-row>
     </mat-toolbar>
     
-      <table class="table table-hover table-dark">
+      <table class="table table-hover table-dark" *ngIf="allCommands.length != 0">
           <thead>
             <tr>
               <th scope="col">No. Table</th>
@@ -15,20 +15,26 @@
               <th scope="col">Total</th>
               <th scope="col">Status</th>
               <th scope="col">Plas</th>
+              <th scope="col">Facture</th>
             </tr>
           </thead>
           <tbody *ngFor="let oneCommand of allCommands; let i = index">
             <tr>
-              <th scope="row">la table No. {{oneCommand.numero_table}}</th>
+              <th scope="row"><div *ngIf="oneCommand.numero_table.split('')[0] == '!'">Aucun</div><div *ngIf="oneCommand.numero_table.split('')[0] != '!'">la table No. {{oneCommand.numero_table}}</div>  </th>
               <td>{{oneCommand.commente}}</td>
               <td>{{oneCommand.total}} DH</td>
               <td (click)="valider(oneCommand)"> 
-                  <h3> 
+                    <h3> 
                       <span class="badge badge-pill badge-light clickable" *ngIf="oneCommand.status!='payé'">{{oneCommand.status}}</span>
-                      <span class="badge badge-success clickable" (click)="facture(oneCommand)" *ngIf="oneCommand.status=='payé'">{{oneCommand.status}}</span>
+                      <span class="badge badge-success" *ngIf="oneCommand.status=='payé'">{{oneCommand.status}}</span>
                     </h3>
                 </td>
               <td><span class="material-icons clickable" (click)="visibility(i)">menu_open</span></td>
+              <td>
+                <span class="material-icons clickable" (click)="facture(oneCommand)" *ngIf="oneCommand.status=='payé'">print</span>
+                <span class="material-icons text-muted" *ngIf="oneCommand.status!='payé'">print</span>
+              </td>
+
             </tr>
             <tr [class.d-none]="!visible[i]">
                 <td colspan="4">
@@ -55,4 +61,7 @@
             </tr>
           </tbody>
         </table>
+        <h1 *ngIf="allCommands.length == 0" class="text-center">
+          Aucun commandes
+        </h1>
   </mat-card>

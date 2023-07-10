@@ -57,4 +57,32 @@ export class AllServicesService {
   changeStatus(data){
     return this.http.post(`${this.url}/changeStatus`, data);
   }
+  changeStatusCaissier(data){
+    return this.http.post(`${this.url}/changeStatusCaissier`, data);
+  }
+  saveCommands(){
+    return this.http.get(`${this.url}/saveCommands`);
+  }
+  getLastDay(){
+    return this.http.get(`${this.url}/getLastDay`);
+  }
+  getNumOfCat(){
+    return this.http.get(`${this.url}/getNumOfCat`);
+  }
+  getNumOfPl(){
+    return this.http.get(`${this.url}/getNumOfPl`);
+  }
+  updateCategories(data){
+    return this.http.post(`${this.url}/updateCategory`, data);
+  }
+  deleteCategory(id){
+    return this.http.get(`${this.url}/deleteCategory/${id}`);
+  }
+  getCommandsLog(){
+    return this.http.get(`${this.url}/getCommandsLog`);
+  }
+  deleteEmp(email){
+    return this.http.get(`${this.url}/deleteEmp/${email}`);
+  }
+  
 }

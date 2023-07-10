@@ -18,6 +18,8 @@ import { EmployeesComponent } from './employees/employees.component';
 import { MenuServeurComponent } from './menu-serveur/menu-serveur.component';
 import { RegisterComponent } from './register/register.component';
 import { TachesCaissierComponent } from './taches-caissier/taches-caissier.component';
+import { ModifierComponent } from './modifier/modifier.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -52,59 +54,31 @@ export const routes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: 'Application'
     },
     children: [
-      { path: 'tachesCaissier', component: TachesCaissierComponent, canActivate: [AfterLoginService]
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AfterLoginService], data: { title: 'Dashboard'}
     },
-    { path: 'taches', component: TachesComponent, canActivate: [AfterLoginService]
+      { path: 'modifier', component: ModifierComponent, canActivate: [AfterLoginService], data: { title: 'Modifier'}
     },
-      { path: 'menu', component: MenuComponent, canActivate: [AfterLoginService]
+      { path: 'tachesCaissier', component: TachesCaissierComponent, canActivate: [AfterLoginService], data: { title: 'Taches caissier'}
     },
-      { path: 'menuServeur', component: MenuServeurComponent, canActivate: [AfterLoginService]
+    { path: 'taches', component: TachesComponent, canActivate: [AfterLoginService], data: { title: 'Taches'}
     },
-      { path: 'menugestion', component: MenugestionComponent, canActivate: [AfterLoginService]
+      { path: 'menu', component: MenuComponent, canActivate: [AfterLoginService], data: { title: 'Menu'}
     },
-    { path: 'employees', component: EmployeesComponent, canActivate: [AfterLoginService]
+      { path: 'menuServeur', component: MenuServeurComponent, canActivate: [AfterLoginService], data: { title: 'Menu serveur'}
+    },
+      { path: 'menugestion', component: MenugestionComponent, canActivate: [AfterLoginService], data: { title: 'Menu gestion'}
+    },
+    { path: 'employees', component: EmployeesComponent, canActivate: [AfterLoginService], data: { title: 'Employees'}
   },
-      { path: 'home', component: HomeComponent, canActivate: [AfterLoginService]
+      { path: 'home', component: HomeComponent, canActivate: [AfterLoginService], data: { title: 'Home'}
     },
       { path: 'profile', component: ProfileComponent, canActivate: [AfterLoginService],data: { title: 'Profile'} 
     },
       {
         path: 'register', component: RegisterComponent, data: { title: 'Register Page' }, canActivate: [AfterLoginService]
-      },
-      {
-        path: 'base',
-        loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
-      },
-      {
-        path: 'buttons',
-        loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
-      },
-      {
-        path: 'charts',
-        loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
-      },
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
       }
     ]
   },

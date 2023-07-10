@@ -7,14 +7,12 @@ class CommandLog{
   total:number;
   created_at:string;
 }
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-
-export class HomeComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   public myDate = new Date();
   public hours = 0;
@@ -74,7 +72,8 @@ export class HomeComponent implements OnInit {
         for(let one of this.allLogs){
           this.barChartLabels.push('Jour '+one.created_at.split(' ')[0].split('-')[2][0]+one.created_at.split(' ')[0].split('-')[2][1]);
           this.barChartData[0].data.push(one.total);
-          this.barChartData[1].data.push(one.nombre);          
+          this.barChartData[1].data.push(one.nombre);
+          
         }        
       }
     )

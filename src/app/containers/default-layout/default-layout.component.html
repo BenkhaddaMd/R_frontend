@@ -15,9 +15,7 @@
         <div class="dropdown-header text-center"><strong>Compte</strong></div>
         <a class="dropdown-item" ><i class="fa fa-briefcase"></i> {{profile.fonction}} : {{profile.name}}<span class="badge badge-info">42</span></a>
         <a class="dropdown-item" routerLink="/profile"><i class="fa fa-user"></i>Profile</a>
-        <div class="dropdown-header text-center"><strong>Settings</strong></div>
-        <div class="divider"></div>
-        <a class="dropdown-item" (click)="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Logout</a>
+        <a class="dropdown-item" (click)="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i>Déconnecter</a>
       </div>
     </li>
   </ul>

@@ -1,0 +1,23 @@
+<mat-card>
+    <h1>Edit Categories</h1>
+    <table class="table ">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of allCategories; let i = index">
+            <td><input type="text" class="form-control" name="name" [(ngModel)]="cat.name"></td>
+            <td><input type="text" class="form-control" name="description" [(ngModel)]="cat.description"></td>
+            <td><button mat-mini-fab color="warn" (click)="delete(i)"><span class="material-icons">delete</span></button></td>
+          </tr>
+         
+          <tr>
+         
+        </tbody>
+      </table>
+      <button type="submit" (click)="update()" class="btn btn-block" style="background-color: #3c0688;color:#fff;letter-spacing: 1px;font-size: 18px;">Update</button>
+    </mat-card>

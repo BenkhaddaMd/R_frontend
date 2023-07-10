@@ -30,4 +30,18 @@ export class EmployeesComponent implements OnInit {
     )
 
   }
+
+  delete(email){
+    this.myServ.deleteEmp(email).subscribe(
+      data => this.deleteFromData(email)
+    );
+  }
+  deleteFromData(data){
+    let i=0;
+    for(let emp of this.AllEmployees){
+      if(emp.email == data)
+        this.AllEmployees.splice(i,1)
+      i++;
+    }
+  }
 }

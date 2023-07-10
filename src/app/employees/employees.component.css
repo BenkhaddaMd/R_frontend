@@ -14,5 +14,7 @@
 .card-avatar img{
   border: 3px solid rgb(173, 175, 175);
 }
-.card-text{
+p span{
+  font-size: 15px;
+    font-weight: 500;
 }

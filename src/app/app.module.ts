@@ -65,6 +65,8 @@ import { RegisterComponent } from './register/register.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CommandeDetailsComponent } from './commande-details/commande-details.component';
 import { TachesCaissierComponent } from './taches-caissier/taches-caissier.component';
+import { ModifierComponent } from './modifier/modifier.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   entryComponents: [CommandeDetailsComponent],
@@ -95,7 +97,8 @@ import { TachesCaissierComponent } from './taches-caissier/taches-caissier.compo
     MatToolbarModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatDialogModule
+    MatDialogModule,
+    ChartsModule
   ],
   declarations: [
     AppComponent,
@@ -113,6 +116,8 @@ import { TachesCaissierComponent } from './taches-caissier/taches-caissier.compo
     MenuServeurComponent,
     CommandeDetailsComponent,
     TachesCaissierComponent,
+    ModifierComponent,
+    DashboardComponent,
   ],
   providers: [{
     provide: LocationStrategy,
